@@ -1,0 +1,50 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Recipes</title>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <img src="{% static 'images/chef.png' %}" alt="chef">
+            <li class="title"><a href="{% url 'index' %}">Recipes</a></li>
+            <li><a href="{% url 'create' %}">Add Recipe</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>My Recipes</h1>
+
+        {% if not recipe %}
+            <h2>There are no recipes.</h2>
+
+         {% else %}
+            {% for r in recipe %}
+                <div class="items-container">
+                    <div class="item">
+                        <h2>{{ r.title }}</h2>
+                        <img class="detail-img" src="{{ r.image_url }}" alt="{{ r.title }}">
+                        <div class="recipe-info">
+                            {{ r.description  }}
+                        </div>
+                        <div class="buttons-container">
+                            <a class="button detail" href="{% url 'details' pk=r.pk %}">Details</a>
+                            <a class="button edit" href="{% url 'edit' pk=r.pk %}">Edit</a>
+                            <a class="button delete" href="{% url 'delete' pk=r.pk %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
