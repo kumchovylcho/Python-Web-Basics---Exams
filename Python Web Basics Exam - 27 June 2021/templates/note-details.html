@@ -14,7 +14,7 @@
             <nav>
                 <ul>
                     <li class="img"><img src="{% static 'images/note.png' %}" alt="note" /></li>
-                    <li><a href="/">Notes</a></li>
+                    <li><a href="/Python%20Web%20Basics%20Exam%20-%2027%20June%202021/static">Notes</a></li>
                     <li class="right">
                         <a href="{% url 'add_note' %}">Add Note</a>
                         <a href="{% url 'view_profile' %}">Profile</a>
@@ -26,18 +26,25 @@
 
         <div class="body">
             <!--headings-->
-            <h1>Edit Note</h1>
+            <h1>Note Details</h1>
             <!--headings-->
 
-            <!--note edit data form-->
-            <div class="form">
-                <form method="POST" action="{% url 'edit_note' pk=note.pk %}">
-                    {{ form }}
-                    {% csrf_token %}
-                    <input type="submit" value="Edit" />
-                </form>
+            <!--details note box-->
+            <div class="note-details-container">
+                <h2>{{ note.title }}</h2>
+                <img class="detail-img" src="{{ note.image_url }}" alt="note-image" />
+                <div>
+                    <p>Content</p>
+                </div>
+                <p>
+                    {{ note.content }}
+                </p>
+                <div class="right">
+                    <a class="button edit" href="{% url 'edit_note' pk=note.pk %}">Edit</a>
+                    <a class="button delete" href="{% url 'delete_note' pk=note.pk%}">Delete</a>
+                </div>
             </div>
-            <!--end note edit data form-->
+            <!--end details note box-->
         </div>
 
         <!--footer-->
