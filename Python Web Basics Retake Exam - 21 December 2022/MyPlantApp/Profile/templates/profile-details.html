@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <!-- profile details section -->
+    <section id="plant-details">
+        <h1>Profile Details</h1>
+        <div class="info-section">
+            <div class="plant-header">
+
+                {% if not profile.profile_picture %}
+                    <!-- default profile image (if the user does NOT have any)-->
+                    <img class="plant-img" src="/static/images/default.jpg" alt='profile-image'/>
+
+                {% else %}
+                    <!-- if the user has a profile image -->
+                    <img class="plant-img" src="{{ profile.profile_picture }}" alt='profile-image'/>
+
+                {% endif %}
+
+                <!-- user full name -->
+                <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+
+                <!-- user username -->
+                <p class="description">Username: {{ profile.username }}</p>
+
+                {% if all_plants %}
+                    <p class="description">Total stars:</p>
+
+                {% endif %}
+
+                {% if all_plants == 1 %}
+                    <!-- if the user has only one plant -->
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+
+                {% elif all_plants == 2 %}
+                    <!-- if the user has two plants -->
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+
+                {% elif all_plants >= 3 %}
+                    <!-- if the user has three or more plants -->
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+                    <img class="star-img" src="/static/images/star3.png" alt='profile-image'/>
+
+                {% else %}
+                    <!-- if the user has zero plants -->
+                    <p class="description">Total stars: {{ all_plants }}</p>
+
+                {% endif %}
+
+                <!-- Edit/Delete buttons -->
+                <div class="buttons">
+                    <a href="{% url 'edit_profile' %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_profile' %}" class="delete-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
